@@ -1,0 +1,6 @@
+data/
+.DS_Store
+#ignore pycache
+__pycache__/
+#don't push checkpoints
+checkpoint/

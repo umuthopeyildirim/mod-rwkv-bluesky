@@ -1,32 +1,32 @@
 model:
-  n_embd: 128
-  n_attn: 2
-  n_head: 2
+  n_embd: 512
+  n_attn: 8
+  n_head: 8
   ctx_len: 512
   rwkv_emb_scale: 1.0
   rwkv_tiny_attn: 64
   rwkv_tiny_head: 2
-  n_ffn: 128
-  n_layer: 2
+  n_ffn: 1024
+  n_layer: 8
   patch_size: 20
-  n_classes: 7
+  n_classes: 1
   resolution: [600, 400]
   scale_init: 0
-  mean : False
-  pos_enc : False
-  block : "identity" 
-  resnet : True
   mlp_head: True
+  mean: False
+  pos_enc: True
+  block: "rwkv" #former rwkv, can decide between "rwkv", "transformer", "identity"  (set resnet = True if identity selected)
+  resnet: True
 training:
-  batch_size : 64
-  log_n : 50
-  train_data_dir : 'data/CAER-S/train'
-  val_data_dir : 'data/CAER-S/valid'
-  test_data_dir : 'data/CAER-S/test'
-  num_epochs : 15
-  warmup_epochs : 1
-  max_epochs : 15
-  warmup_factor : 0.1
-  batch_size_val : 64
-  lr : 0.001
-  #This is part of experiment 1 small model
+  batch_size: 64
+  log_n: 50
+  train_data_dir: "data/SN/train"
+  val_data_dir: "data/SN/valid"
+  test_data_dir: "data/SN/test"
+  num_epochs: 5
+  warmup_epochs: 1
+  max_epochs: 5
+  warmup_factor: 0.1
+  batch_size_val: 64
+  lr: 0.0008 # default adam is 0.00000001
+  #Default config not necessary

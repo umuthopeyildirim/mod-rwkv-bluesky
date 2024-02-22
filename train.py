@@ -49,7 +49,7 @@ def main(args=None):
 
     # save path
     save_dir = 'checkpoint'
-    current_time = str(time.time())
+    current_time = time.strftime("%Y%m%d-%H%M%S")
 
     print("cuda avail:", torch.cuda.is_available())
     # get the data set
@@ -159,7 +159,6 @@ def main(args=None):
             optimizer.zero_grad()
 
             # forward + backward + optimize
-            print("labels:", labels)
             outputs = model(inputs)
             loss = criterion(outputs, labels)
 

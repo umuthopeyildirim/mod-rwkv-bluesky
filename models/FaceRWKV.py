@@ -111,20 +111,20 @@ class FaceRWKV(nn.Module):
 class RWKVConfig:
     def __init__(self):
         # Model architecture parameters
-        self.n_embd = 256           # Embedding size
-        self.n_attn = 4             # Number of attention mlp_heads
-        self.n_head = 4             # Number of mlp_heads for RWKV_TinyAttn
+        self.n_embd = 512           # Embedding size
+        self.n_attn = 8             # Number of attention mlp_heads
+        self.n_head = 8             # Number of mlp_heads for RWKV_TinyAttn
         # Context length -> apparently crashes for too short context????
-        self.ctx_len = 256
+        self.ctx_len = 512
         # self.vocab_size = 50000    # Vocabulary size
         # Scale for final projection in RWKV_TimeMix and RWKV_ChannelMix
         self.rwkv_emb_scale = 1.0
         self.rwkv_tiny_attn = 64    # Tiny attention size for RWKV_TinyAttn
         self.rwkv_tiny_head = 2     # Number of tiny attention mlp_heads for RWKV_TinyAttn
-        self.n_ffn = 512            # Hidden size for RWKV_ChannelMix
-        self.n_layer = 4            # Number of RWKV blocks
+        self.n_ffn = 1024            # Hidden size for RWKV_ChannelMix
+        self.n_layer = 8            # Number of RWKV blocks
         self.patch_size = 20        # Size of patches to be extracted from input images
-        self.n_classes = 7          # Number of output classes
+        self.n_classes = 1          # Number of output classes
         self.resolution = (600, 400)
         # will calculate mean over sequence if true, else take last hidden state (perfroms better when turned off)
         self.mean = False
@@ -135,8 +135,8 @@ class RWKVConfig:
         self.rwkv = True            # When true use rwkv blocks, else use transformer blocks
         # Which block to use, options are "rwkv", "transformer", "identity"
         self.block = "rwkv"
-        self.mlp_head = False        # Whether to use an mlp mlp_head or a linear mlp_head
-        self.resnet = False
+        self.mlp_head = True        # Whether to use an mlp mlp_head or a linear mlp_head
+        self.resnet = True
 
     def calculate_decay_speed(self, h):
         """

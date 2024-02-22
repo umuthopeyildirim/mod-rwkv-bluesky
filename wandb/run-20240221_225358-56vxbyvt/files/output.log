@@ -1,0 +1,16 @@
+Trainable parameters in the model: 35275969
+All parameters in the model: 35275969
+Traceback (most recent call last):
+  File "/Users/hope/Desktop/Projects/mod-rwkv/train.py", line 207, in <module>
+    main(args)
+  File "/Users/hope/Desktop/Projects/mod-rwkv/train.py", line 163, in main
+    loss = criterion(outputs, labels)
+  File "/Users/hope/anaconda3/envs/depthrwkv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Users/hope/anaconda3/envs/depthrwkv/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/hope/anaconda3/envs/depthrwkv/lib/python3.10/site-packages/torch/nn/modules/loss.py", line 1179, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+  File "/Users/hope/anaconda3/envs/depthrwkv/lib/python3.10/site-packages/torch/nn/functional.py", line 3059, in cross_entropy
+    return torch._C._nn.cross_entropy_loss(input, target, weight, _Reduction.get_enum(reduction), ignore_index, label_smoothing)
+IndexError: Target 1 is out of bounds.

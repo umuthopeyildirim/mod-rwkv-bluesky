@@ -1,26 +1,19 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 import torch.optim as optim
-import torchvision
-import torchvision.transforms as transforms
 import torch.optim as optim
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-import numpy as np
 import torch.utils.data
 from tqdm import tqdm
-import socket
 import time
 import os
 import argparse
-# from torchinfo import summary
 import wandb
+import yaml
 
 from models.FaceRWKV import FaceRWKV, RWKVConfig
-# from Dataset import CAERSRDataset
+from Dataset import CAERSRDataset
 from utils import WarmupCosineAnnealingLR
-
-import yaml
 
 
 def main(args=None):
@@ -46,12 +39,9 @@ def main(args=None):
         accuracy = correct / total
         return accuracy
 
-    # save path
-    save_dir = 'checkpoint'
     current_time = time.strftime("%Y%m%d-%H%M%S")
 
     print("cuda avail:", torch.cuda.is_available())
-    # get the data set
 
     # load the config
     with open(args.config, 'r') as f:
@@ -98,7 +88,6 @@ def main(args=None):
     print("Classes:", config.num_classes)
 
     model = FaceRWKV(config)
-    # model = CNNClassifier(train_dataset.get_classes())
 
     CUDA = torch.cuda.is_available()
     if CUDA:

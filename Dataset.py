@@ -27,12 +27,12 @@ class CAERSRDataset(Dataset):
         if mode == "test":
             self.transforms = transforms.Compose([
                 transforms.ToTensor(),
-                transforms.Resize(resolution),
+                transforms.Resize(resolution, antialias=True),
             ])
         elif mode == "train":
             self.transforms = transforms.Compose([
                 transforms.ToTensor(),
-                transforms.Resize(resolution),
+                transforms.Resize(resolution, antialias=True),
                 transforms.RandomHorizontalFlip()
             ])
         else:

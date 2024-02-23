@@ -1,0 +1,52 @@
+diff --git a/train.py b/train.py
+index 70198b4..781784e 100644
+--- a/train.py
++++ b/train.py
+@@ -75,6 +75,7 @@ def main(args=None):
+     config = RWKVConfig()
+     if args is not None:
+         config.from_yaml(args.config)
++    print(config)
+     # Safety first
+     # should reduce unnecessary padding
+     config.ctx_len = int(
+@@ -95,9 +96,10 @@ def main(args=None):
+ 
+     # get classes
+     config.num_classes = train_dataset.get_classes()
++    print("Classes:", config.num_classes)
+ 
+-    # model = FaceRWKV(config)
+-    model = CNNClassifier(train_dataset.get_classes())
++    model = FaceRWKV(config)
++    # model = CNNClassifier(train_dataset.get_classes())
+ 
+     CUDA = torch.cuda.is_available()
+     if CUDA:
+diff --git a/wandb/debug-internal.log b/wandb/debug-internal.log
+index 6f746a2..e2100a7 120000
+--- a/wandb/debug-internal.log
++++ b/wandb/debug-internal.log
+@@ -1 +1 @@
+-run-20240221_225358-56vxbyvt/logs/debug-internal.log
+\ No newline at end of file
++run-20240222_195717-fjk3fexn/logs/debug-internal.log
+\ No newline at end of file
+diff --git a/wandb/debug.log b/wandb/debug.log
+index 8dc03d6..9c4d4d3 120000
+--- a/wandb/debug.log
++++ b/wandb/debug.log
+@@ -1 +1 @@
+-run-20240221_225358-56vxbyvt/logs/debug.log
+\ No newline at end of file
++run-20240222_195717-fjk3fexn/logs/debug.log
+\ No newline at end of file
+diff --git a/wandb/latest-run b/wandb/latest-run
+index 1c3e872..01c1bcc 120000
+--- a/wandb/latest-run
++++ b/wandb/latest-run
+@@ -1 +1 @@
+-run-20240221_225358-56vxbyvt
+\ No newline at end of file
++run-20240222_195717-fjk3fexn
+\ No newline at end of file

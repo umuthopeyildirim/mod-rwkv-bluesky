@@ -1,0 +1,52 @@
+{
+    "os": "macOS-14.3.1-arm64-arm-64bit",
+    "python": "3.10.13",
+    "heartbeatAt": "2024-02-23T03:58:37.338646",
+    "startedAt": "2024-02-23T03:58:36.928066",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--config",
+        "config/config.yml"
+    ],
+    "state": "running",
+    "program": "/Users/hope/Desktop/Projects/mod-rwkv/train.py",
+    "codePathLocal": "train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "git@github.com:umuthopeyildirim/mod-rwkv.git",
+        "commit": "49171a82a0c859f493b814f05a3a882f5510e5c2"
+    },
+    "email": "umut475@gmail.com",
+    "root": "/Users/hope/Desktop/Projects/mod-rwkv",
+    "host": "Umuts-MacBook-Pro.local",
+    "username": "hope",
+    "executable": "/Users/hope/anaconda3/envs/depthrwkv/bin/python",
+    "cpu_count": 12,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 3504,
+        "min": 702,
+        "max": 3504
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3504,
+            "min": 702,
+            "max": 3504
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 460.4317207336426,
+            "used": 188.9643440246582
+        }
+    },
+    "gpuapple": {
+        "type": "arm",
+        "vendor": "Apple"
+    },
+    "memory": {
+        "total": 16.0
+    }
+}

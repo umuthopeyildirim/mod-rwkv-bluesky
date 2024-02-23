@@ -9,7 +9,7 @@ model:
   n_ffn: 1024
   n_layer: 8
   patch_size: 20
-  n_classes: 1
+  n_classes: 2
   resolution: [600, 400]
   scale_init: 0
   mlp_head: True

@@ -17,7 +17,8 @@ import argparse
 import wandb
 
 from models.FaceRWKV import FaceRWKV, RWKVConfig
-# from Dataset import CAERSRDataset
+from models.CNNmodel import CNNClassifier
+from Dataset import CAERSRDataset
 from utils import WarmupCosineAnnealingLR
 
 import yaml

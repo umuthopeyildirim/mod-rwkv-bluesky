@@ -6,3 +6,5 @@
 .env.test
 .env.production
 .env.local.*
+.DS_Store
+backend/venv/

@@ -6,15 +6,30 @@ import uvicorn
 import asyncio
 import os
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
+
 
 load_dotenv()
 app = FastAPI()
 
+# Define a list of origins that should be permitted to make cross-origin requests
+origins = [
+    "http://localhost:3000",  # Assuming your React app is served from this URL
+    "http://localhost:8000",  # Include this if your frontend might request from the same origin
+]
+
+# Add CORSMiddleware to the application
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # Allows specified origins to make requests
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
 
 client = Client(base_url='https://bsky.social')
 client.login(os.getenv('USERNAME'),os.getenv('PASSWORD') )
-
-app = FastAPI()
 
 def process_timeline():
     timeline = client.get_timeline(algorithm='reverse-chronological')

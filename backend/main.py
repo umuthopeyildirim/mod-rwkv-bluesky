@@ -39,9 +39,8 @@ def process_timeline():
                             'display_name' : author.display_name,
                             'text' : post.text
                         }
-                print("Hey")
         new_data = process_images_and_update_classes(new_data)
-        json_data.extend(new_data)
+        json_data.update(new_data)
         json.dump(json_data, file, indent=2)
 
 def process_images_and_update_classes(posts):

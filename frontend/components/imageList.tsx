@@ -16,6 +16,7 @@ export default function Component() {
     const fetchImages = async () => {
       try {
         const response = await fetch('http://localhost:8000/api/process_timeline', {
+          // const response = await fetch('/api/process_timeline', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

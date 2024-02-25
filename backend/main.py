@@ -77,12 +77,12 @@ def process_images(images):
     # Your image processing logic here
     # For example, you might use a machine learning model to classify text in images
     # Replace the following line with your actual logic
-    text_tags = ["tag1", "tag2", "tag3"]
+    text_tags = ["tag1"]
 
     return text_tags
     
 
-@app.post("/api/process_timeline")
+@app.get("/api/process_timeline")
 async def process_timeline_api(background_tasks: BackgroundTasks):
     # Use background task to run the blocking process_timeline
     background_tasks.add_task(process_timeline)

@@ -3,10 +3,11 @@ import { CardContent, Card } from "@/components/ui/card";
 
 // Assuming you have a type for your images
 type ImageInfo = {
-  id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
+  id : string;
+  display_name: string;
+  text: string;
+  images: string[];
+  image_classes : string[];
 };
 
 export default function Component() {
@@ -14,12 +15,20 @@ export default function Component() {
 
   useEffect(() => {
     const fetchImages = () => {
-      fetch('/api/images')
+      fetch('http://localhost:8000/api/process_timeline')
         .then(response => response.json())
         .then(newImages => {
           // Check if the fetched images are different from the current state
-          if (JSON.stringify(newImages) !== JSON.stringify(images)) {
-            setImages(newImages);
+          const imagesList = Object.keys(newImages).map(key => ({
+            post_uri: key,
+            display_name: newImages[key].display_name,
+            image_classes: newImages[key].image_classes,
+            images: newImages[key].images,
+            text: newImages[key].text
+          }));
+
+          if (JSON.stringify(imagesList) !== JSON.stringify(images)) {
+            setImages(images);
           }
         })
         .catch(error => console.error("Failed to load images", error));
@@ -53,16 +62,16 @@ export default function Component() {
             <Card key={image.id} className="w-full">
               <CardContent className="p-4 md:p-6 grid gap-4">
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-xl font-bold tracking-tight">{image.title}</h2>
+                  <h2 className="text-xl font-bold tracking-tight">{image.display_name}</h2>
                   <p className="text-sm leading-normal text-gray-500 dark:text-gray-400">
-                    {image.description}
+                    {image.text}
                   </p>
                 </div>
                 <div className="aspect-video w-full max-w-[400px] mx-auto overflow-hidden rounded-lg">
                   <img
-                    alt={image.title}
+                    alt={image.display_name}
                     className="aspect-video object-cover"
-                    src={image.imageUrl}
+                    src={image.images[0]}
                     width="400"
                     height="225"
                   />

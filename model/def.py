@@ -5,7 +5,7 @@ from torchvision import transforms
 import torch
 from models.FaceRWKV import FaceRWKV, RWKVConfig
 
-checkpoint_path = "checkpoint/epoch20.pth"
+checkpoint_path = "checkpoint/epoch5.pth"
 config_path = "config/done/xlargeDone.yml"
 
 
@@ -44,8 +44,8 @@ def predict(model, image_tensor, device='cpu'):
 
 
 # Example usage
-# image_url = "https://cdn77-pic.xvideos-cdn.com/videos/thumbs169poster/6d/ae/72/6dae72c76bfbce47b93857e182982ebe/6dae72c76bfbce47b93857e182982ebe.30.jpg" # NSFW
-image_url = "https://media.istockphoto.com/id/476422621/photo/portrait-of-young-man.jpg?s=612x612&w=0&k=20&c=F_5hycVHvqutuluWpNpCCc5S4hHE9r7NJWSg1d5bxeg="  # NORMAL
+# image_url = "https://cdn77-pic.xvideos-cdn.com/videos/thumbs169poster/6d/ae/72/6dae72c76bfbce47b93857e182982ebe/6dae72c76bfbce47b93857e182982ebe.30.jpg"  # NSFW
+# image_url = "https://media.istockphoto.com/id/476422621/photo/portrait-of-young-man.jpg?s=612x612&w=0&k=20&c=F_5hycVHvqutuluWpNpCCc5S4hHE9r7NJWSg1d5bxeg="  # NORMAL
 image = download_image(image_url)
 image_tensor = preprocess_image(image)
 

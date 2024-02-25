@@ -18,14 +18,15 @@ app = FastAPI()
 
 def process_timeline():
     timeline = client.get_timeline(algorithm='reverse-chronological')
-    with open('data.json', 'r') as file:
-        json_data = []
+    with open('data.json', 'w+') as file:
+        json_data = {}
         try:
             json_data = json.load(file)
         except json.JSONDecodeError:
-            json_data = []
+            json_data = {}
+        new_data = {}
         for feed_view in timeline.feed:
-            if feed_view.post.uri in json_data:
+            if feed_view.post.uri not in json_data:
                 post = feed_view.post.record
                 author = feed_view.post.author
                 images = []
@@ -33,15 +34,54 @@ def process_timeline():
                     for image in feed_view.post.embed.images:
                         images.append(image.fullsize)
                 if images:
-                    json_data.append({
-                        feed_view.post.uri :{
+                    new_data[feed_view.post.uri] = {
                             'images' : images,
                             'display_name' : author.display_name,
                             'text' : post.text
                         }
-                    })
-    with open('data.json', 'w') as file:
+                print("Hey")
+        new_data = process_images_and_update_classes(new_data)
+        json_data.extend(new_data)
         json.dump(json_data, file, indent=2)
+
+def process_images_and_update_classes(posts):
+    new_data = {}
+    for post_uri, post_data in posts.items():
+        images = post_data['images']
+        display_name = post_data['display_name']
+        post_text = post_data['text']
+
+        # Assume process_images is a function that processes images and returns text class tags
+        image_tags = process_images(images)
+
+        # Update the 'new_data' dictionary with the text class tags
+        new_data[post_uri] = {
+            'display_name': display_name,
+            'image_classes': image_tags,
+            'images': images,
+            'text': post_text
+        }
+
+    # Now 'new_data' contains the processed data in the desired structure
+    return new_data
+
+def process_images(images):
+    """
+    Placeholder function to process images and return text class tags.
+
+    Parameters:
+    - images: List of images for a post.
+
+    Returns:
+    - List of text class tags.
+    """
+    # Your image processing logic here
+    # For example, you might use a machine learning model to classify text in images
+    # Replace the following line with your actual logic
+    text_tags = ["tag1", "tag2", "tag3"]
+
+    return text_tags
+    
 
 @app.post("/api/process_timeline")
 async def process_timeline_api(background_tasks: BackgroundTasks):
@@ -52,6 +92,6 @@ async def process_timeline_api(background_tasks: BackgroundTasks):
         json_data = json.load(file)
     return {"Data": json_data}
 
-# if __name__ == "__main__":
-#     import uvicorn
-#     uvicorn.run(app, host="127.0.0.1", port=8000)
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
